@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pepe Ayulo — Jardinería y Paisajismo</title>
+  <meta name="description" content="Jardinería premium con el ojo del jardinero. Transforma tu exterior en un espacio verde que vende por su imagen." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; color: #1F2C1E; background: #F6F2E9; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+
+    :root {
+      --green-dark: #1F3C2C;
+      --green-mid: #2F6F3A;
+      --green-light: #7EBE7A;
+      --sand: #D9C9A0;
+      --cream: #F8F4E7;
+      --white: #FFFFFF;
+      --ink: #1A1A1A;
+      --ink-soft: #4C5A46;
+      --ink-muted: #6B7A62;
+      --border: rgba(31,44,30,.12);
+      --shadow-sm: 0 8px 24px rgba(31,44,30,.08);
+      --shadow-lg: 0 18px 50px rgba(31,44,30,.12);
+      --radius: 24px;
+      --radius-sm: 14px;
+      --transition: .35s cubic-bezier(.4,0,.2,1);
+    }
+
+    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    .section { padding: 100px 0; }
+    .section-alt { background: var(--white); }
+
+    header { position: fixed; inset: 0 0 auto; z-index: 1000; background: rgba(248,244,231,.82); backdrop-filter: blur(16px); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo .name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--green-dark); }
+    .nav-logo .tag { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--green-light); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: .9rem; font-weight: 500; color: var(--ink-soft); position: relative; padding: 10px 0; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -6px; left: 0; right: 0; height: 2px; background: var(--green-mid); transform: scaleX(0); transform-origin: left; transition: transform var(--transition); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta { background: var(--green-dark); color: var(--white); padding: 10px 24px; border-radius: 999px; box-shadow: 0 12px 30px rgba(47,111,58,.18); }
+    .nav-cta:hover { background: #24492f; }
+
+    #hero { position: relative; min-height: 100vh; display: grid; align-items: center; padding: 120px 0 90px; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(160deg, rgba(31,60,44,.88) 0%, rgba(47,111,58,.75) 45%, rgba(31,60,44,.9) 100%), url('https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; }
+    .hero-shapes { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+    .hero-shapes::before { content: ''; position: absolute; width: 520px; height: 520px; border-radius: 50%; top: -80px; right: -80px; background: radial-gradient(circle, rgba(255,255,255,.18) 0%, transparent 70%); }
+    .hero-shapes::after { content: ''; position: absolute; width: 320px; height: 320px; border-radius: 50%; bottom: -60px; left: -40px; background: radial-gradient(circle, rgba(255,255,255,.16) 0%, transparent 72%); }
+
+    .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 420px; gap: 56px; align-items: center; width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+    .hero-copy { max-width: 620px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); padding: 8px 18px; border-radius: 999px; color: rgba(255,255,255,.9); letter-spacing: .08em; text-transform: uppercase; font-size: .78rem; margin-bottom: 24px; }
+    .hero-badge i { color: var(--sand); }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 5vw, 5.1rem); line-height: 1.05; margin-bottom: 24px; color: var(--white); }
+    .hero-title em { display: block; font-style: italic; color: var(--sand); }
+    .hero-subtitle { font-size: 1.12rem; color: rgba(255,255,255,.84); max-width: 520px; line-height: 1.75; margin-bottom: 34px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 28px; border-radius: 999px; font-weight: 600; transition: transform var(--transition), background var(--transition), box-shadow var(--transition); border: 2px solid transparent; }
+    .btn-primary { background: var(--sand); color: var(--green-dark); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(255,255,255,.15); }
+    .btn-ghost { background: rgba(255,255,255,.12); color: var(--white); border-color: rgba(255,255,255,.25); }
+    .btn-ghost:hover { transform: translateY(-2px); background: rgba(255,255,255,.2); }
+
+    .hero-card { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.18); border-radius: 28px; backdrop-filter: blur(18px); padding: 34px; color: var(--white); }
+    .hero-card-photo { width: 110px; height: 110px; border-radius: 50%; background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.1)); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--white); margin: 0 auto 22px; border: 3px solid rgba(255,255,255,.24); }
+    .hero-card-name { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; text-align: center; margin-bottom: 6px; }
+    .hero-card-role { text-align: center; font-size: .85rem; color: rgba(255,255,255,.8); letter-spacing: .08em; text-transform: uppercase; font-weight: 600; margin-bottom: 26px; }
+    .hero-card-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .hcs-item { background: rgba(255,255,255,.08); border-radius: 18px; padding: 18px; text-align: center; }
+    .hcs-item .num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--sand); margin-bottom: 6px; }
+    .hcs-item .lbl { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.75); }
+    .hero-scroll { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.75); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; animation: float 2.6s ease-in-out infinite; }
+    .hero-scroll i { font-size: .9rem; }
+    @keyframes float { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+    .section-label { display: inline-flex; align-items: center; gap: 10px; font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 16px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.8rem); line-height: 1.1; color: var(--green-dark); margin-bottom: 18px; }
+    .section-title span { color: var(--sand); }
+    .section-lead { font-size: 1rem; color: var(--ink-soft); max-width: 640px; line-height: 1.75; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 32px; }
+    .service-card { background: var(--white); border-radius: var(--radius); padding: 32px 28px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: transform var(--transition), border-color var(--transition); }
+    .service-card:hover { transform: translateY(-6px); border-color: rgba(47,111,58,.2); }
+    .service-icon { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; background: rgba(47,111,58,.08); color: var(--green-dark); font-size: 1.4rem; margin-bottom: 20px; }
+    .service-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 10px; color: var(--green-dark); }
+    .service-desc { color: var(--ink-muted); line-height: 1.75; }
+
+    .portfolio-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 46px; flex-wrap: wrap; gap: 22px; }
+    .portfolio-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 16px; }
+    .portfolio-item { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--green-light); color: var(--white); }
+    .portfolio-item::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(31,60,44,.25), rgba(31,60,44,.55)); }
+    .portfolio-item:first-child { grid-row: span 2; }
+    .portfolio-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: rgba(255,255,255,.88); position: relative; z-index: 1; }
+    .portfolio-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 24px; z-index: 2; }
+    .portfolio-overlay-text h4 { margin: 0 0 6px; font-size: 1.15rem; }
+    .portfolio-overlay-text p { margin: 0; font-size: .82rem; opacity: .9; }
+
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 42px; }
+    .testimonial-card { background: rgba(255,255,255,.95); border-radius: 28px; border: 1px solid rgba(119,142,104,.15); padding: 34px; box-shadow: var(--shadow-sm); }
+    .testimonial-quote-mark { font-size: 3.5rem; color: var(--green-mid); margin-bottom: 20px; line-height: .7; }
+    .testimonial-text { color: var(--ink-soft); line-height: 1.85; margin-bottom: 28px; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--green-light), var(--green-dark)); display: grid; place-items: center; color: var(--white); font-weight: 700; }
+    .testimonial-author-info .name { font-weight: 700; color: var(--green-dark); }
+    .testimonial-author-info .location { font-size: .82rem; color: var(--ink-muted); }
+
+    .form-section { background: var(--cream); border-radius: 32px; padding: 64px 0; }
+    .form-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: flex-start; }
+    .form-copy h2 { margin-top: 0; }
+    .form-copy p { color: var(--ink-soft); line-height: 1.8; margin-bottom: 28px; }
+    .form-copy ul { list-style: none; display: grid; gap: 16px; padding: 0; margin: 0; }
+    .form-copy li { display: flex; align-items: flex-start; gap: 12px; color: var(--ink-muted); }
+    .form-copy li i { margin-top: 4px; color: var(--green-mid); }
+    .form-panel { background: var(--white); border-radius: 28px; padding: 32px; border: 1px solid rgba(119,142,104,.16); box-shadow: var(--shadow-sm); }
+    .form-group { display: grid; gap: 12px; margin-bottom: 18px; }
+    .form-group label { font-size: .9rem; font-weight: 600; color: var(--green-dark); }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; border: 1px solid rgba(47,111,58,.16); border-radius: 18px; padding: 15px 18px; background: #fff; color: var(--ink); transition: border var(--transition), box-shadow var(--transition); }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--green-mid); box-shadow: 0 0 0 4px rgba(47,111,58,.12); }
+    .form-group textarea { min-height: 150px; resize: vertical; }
+    .form-submit { display: inline-flex; align-items: center; gap: 12px; background: var(--green-dark); color: white; border: none; padding: 16px 26px; border-radius: 999px; font-weight: 700; cursor: pointer; transition: transform var(--transition), background var(--transition); }
+    .form-submit:hover { transform: translateY(-2px); background: #24492f; }
+    .form-hint { font-size: .85rem; color: var(--ink-muted); }
+
+    footer { padding: 64px 0 24px; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; margin-bottom: 42px; }
+    .footer-brand .brand-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 12px; color: var(--green-dark); }
+    .footer-brand .brand-tag { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--green-light); margin-bottom: 18px; display: inline-block; }
+    .footer-links h4, .footer-contact h4 { font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 18px; }
+    .footer-links ul { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { color: var(--ink-soft); transition: color var(--transition); }
+    .footer-links a:hover { color: var(--green-dark); }
+    .footer-contact { display: grid; gap: 14px; }
+    .footer-contact span { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-soft); }
+    .footer-bottom { border-top: 1px solid rgba(31,44,30,.08); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: .9rem; color: var(--ink-muted); }
+
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .portfolio-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .testimonial-grid { grid-template-columns: 1fr 1fr; }
+      .form-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      header { padding: 14px 0; }
+      .nav-inner { flex-direction: column; align-items: flex-start; height: auto; }
+      #hero { padding: 100px 0 80px; }
+      .hero-title { font-size: 3rem; }
+      .hero-card { padding: 28px; }
+      .service-card, .testimonial-card, .form-panel { padding: 26px; }
+      .services-grid, .testimonial-grid, .portfolio-grid, .form-inner, .footer-grid { grid-template-columns: 1fr; }
+      .footer-grid { gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav-inner">
+        <a href="#hero" class="nav-logo">
+          <span class="name">Pepe Ayulo</span>
+          <span class="tag">Jardinería & Paisajismo</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#jardin">Portfolio</a></li>
+          <li><a href="#contacto" class="nav-cta">Contactar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-shapes"></div>
+      <div class="hero-inner container">
+        <div class="hero-copy">
+          <div class="hero-badge"><i class="fa-solid fa-leaf"></i> Jardinería con feeling</div>
+          <h1 class="hero-title">El jardinero que crea <em>paisajes que venden</em></h1>
+          <p class="hero-subtitle">Más que paisajismo, diseño jardines que impactan con su primera impresión, que funcionan en la práctica y que mantienen la estética moderna que pide el mercado.</p>
+          <div class="hero-actions">
+            <a href="#contacto" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Solicitar presupuesto</a>
+            <a href="#jardin" class="btn btn-ghost"><i class="fa-solid fa-images"></i> Ver proyectos</a>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <div class="hero-card-photo"><i class="fa-solid fa-seedling"></i></div>
+          <div class="hero-card-name">Pepe Ayulo</div>
+          <div class="hero-card-role">Jardinero profesional</div>
+          <div class="hero-card-stats">
+            <div class="hcs-item"><div class="num">2,500</div><div class="lbl">Proyectos</div></div>
+            <div class="hcs-item"><div class="num">20+</div><div class="lbl">Años</div></div>
+            <div class="hcs-item"><div class="num">VA</div><div class="lbl">Certificado</div></div>
+            <div class="hcs-item"><div class="num">100%</div><div class="lbl">Enfoque verde</div></div>
+          </div>
+        </aside>
+      </div>
+      <div class="hero-scroll"><span>Desliza</span><i class="fa-solid fa-chevron-down"></i></div>
+    </section>
+
+    <section id="servicios" class="section section-alt">
+      <div class="container">
+        <div class="section-label">Servicios</div>
+        <h2 class="section-title">Jardines diseñados para vender con el ojo</h2>
+        <p class="section-lead">Cada proyecto equilibra estética, funcionalidad y facilidad de mantenimiento. El resultado es un jardín que se ve bien y que vive bien.</p>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-tree"></i></div>
+            <h3 class="service-name">Diseño de jardín</h3>
+            <p class="service-desc">Conceptos de plantación, caminos, zonas de descanso y detalles de jardinería para espacios residenciales.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-droplet"></i></div>
+            <h3 class="service-name">Riego inteligente</h3>
+            <p class="service-desc">Instalación de sistemas de riego eficientes y diseño botánico pensado para cada estación.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-seedling"></i></div>
+            <h3 class="service-name">Plantaciones premium</h3>
+            <p class="service-desc">Selección de plantas con porte, color y textura para espacios que destacan en fotos y visitas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="jardin" class="section">
+      <div class="container">
+        <div class="portfolio-header">
+          <div>
+            <div class="section-label">Portfolio</div>
+            <h2 class="section-title">Proyectos con presencia verde</h2>
+          </div>
+          <a href="#contacto" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i> Consultar disponibilidad</a>
+        </div>
+
+        <div class="portfolio-grid">
+          <div class="portfolio-item"><div class="portfolio-placeholder"><i class="fa-solid fa-seedling"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-text"><h4>Patio acogedor</h4><p>Loudoun County</p></div></div></div>
+          <div class="portfolio-item"><div class="portfolio-placeholder"><i class="fa-solid fa-tree-city"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-text"><h4>Terraza viva</h4><p>Fairfax, VA</p></div></div></div>
+          <div class="portfolio-item"><div class="portfolio-placeholder"><i class="fa-solid fa-water"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-text"><h4>Zona de agua</h4><p>Aldie, VA</p></div></div></div>
+          <div class="portfolio-item"><div class="portfolio-placeholder"><i class="fa-solid fa-hands-holding-seedling"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-text"><h4>Entrada verde</h4><p>Residential</p></div></div></div>
+          <div class="portfolio-item"><div class="portfolio-placeholder"><i class="fa-solid fa-leaf"></i></div><div class="portfolio-overlay"><div class="portfolio-overlay-text"><h4>Jardín visual</h4><p>Modern home</p></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-label">Opiniones</div>
+        <h2 class="section-title">Clientes que recomiendan</h2>
+        <div class="testimonial-grid">
+          <article class="testimonial-card"><div class="testimonial-quote-mark">“</div><p class="testimonial-text">Pepe transformó nuestro frente aburrido en una entrada que cautiva a cualquiera. La comunicación por correo fue clara y rápida.</p><div class="testimonial-author"><div class="testimonial-avatar">M</div><div class="testimonial-author-info"><div class="name">María P.</div><div class="location">Loudoun, VA</div></div></div></article>
+          <article class="testimonial-card"><div class="testimonial-quote-mark">“</div><p class="testimonial-text">El diseño fue fresco, la instalación ordenada y el resultado, precioso. Se notó que sabía exactamente qué plantar para este clima.</p><div class="testimonial-author"><div class="testimonial-avatar">J</div><div class="testimonial-author-info"><div class="name">Juan E.</div><div class="location">Fairfax, VA</div></div></div></article>
+          <article class="testimonial-card"><div class="testimonial-quote-mark">“</div><p class="testimonial-text">Nos encantó el feeling jardinería: natural, elegante y muy actual. Respondió rápido y el correo inició la comunicación sin problemas.</p><div class="testimonial-author"><div class="testimonial-avatar">C</div><div class="testimonial-author-info"><div class="name">Carla M.</div><div class="location">Aldie, VA</div></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="section form-section">
+      <div class="container">
+        <div class="form-inner">
+          <div class="form-copy">
+            <div class="section-label">Contacto</div>
+            <h2 class="section-title">Habla con el jardinero</h2>
+            <p>Completa este formulario para que Pepe reciba tu consulta por correo. Es la forma más rápida de obtener un presupuesto claro para tu jardín.</p>
+            <ul>
+              <li><i class="fa-solid fa-check"></i> Respuesta rápida desde email</li>
+              <li><i class="fa-solid fa-check"></i> Presupuesto claro para tu jardín</li>
+              <li><i class="fa-solid fa-check"></i> Ideas adaptadas a tu clima y espacio</li>
+            </ul>
+          </div>
+
+          <div class="form-panel">
+            <form id="contactForm" onsubmit="return enviarCorreo(event)">
+              <div class="form-group"><label for="name">Nombre completo</label><input type="text" id="name" name="name" placeholder="Ej. Ana Gómez" required></div>
+              <div class="form-group"><label for="email">Correo electrónico</label><input type="email" id="email" name="email" placeholder="tu@correo.com" required></div>
+              <div class="form-group"><label for="phone">Teléfono</label><input type="tel" id="phone" name="phone" placeholder="(555) 123-4567"></div>
+              <div class="form-group"><label for="project">Tipo de proyecto</label><select id="project" name="project" required><option value="">Selecciona una opción</option><option value="Jardín residencial">Jardín residencial</option><option value="Terraza / balcón">Terraza / balcón</option><option value="Área de césped">Área de césped</option><option value="Riego y plantación">Riego y plantación</option><option value="Otro">Otro</option></select></div>
+              <div class="form-group"><label for="message">Cuéntame tu idea</label><textarea id="message" name="message" placeholder="Describe tu espacio, tu visión y tu presupuesto." required></textarea></div>
+              <button type="submit" class="form-submit"><i class="fa-solid fa-paper-plane"></i> Enviar por email</button>
+              <p class="form-hint">Correo de destino: <strong>pepe@meadowsfarms.com</strong></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-name">Pepe Ayulo</div>
+        <div class="brand-tag">Jardinería & Paisajismo</div>
+        <p>Jardines con alma, diseñados para durar. Soluciones verdes pensadas para clientes que quieren impacto visual y practicidad.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Enlaces rápidos</h4>
+        <ul>
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#jardin">Portfolio</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contacto</h4>
+        <span><i class="fa-solid fa-map-pin"></i> Loudoun & Fairfax Counties, VA</span>
+        <span><i class="fa-solid fa-envelope"></i> pepe@meadowsfarms.com</span>
+        <span><i class="fa-solid fa-phone"></i> +1 (703) 555-0124</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Pepe Ayulo | Jardinería con ojo.</span>
+      <span>Diseño que vende con la primera vista.</span>
+    </div>
+  </footer>
+
+  <script>
+    function enviarCorreo(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const name = encodeURIComponent(form.name.value.trim());
+      const email = encodeURIComponent(form.email.value.trim());
+      const phone = encodeURIComponent(form.phone.value.trim());
+      const project = encodeURIComponent(form.project.value);
+      const message = encodeURIComponent(form.message.value.trim());
+      const subject = encodeURIComponent('Solicitud de presupuesto - Jardinería');
+      const body = encodeURIComponent(
+        `Nombre: ${decodeURIComponent(name)}\n` +
+        `Email: ${decodeURIComponent(email)}\n` +
+        `Teléfono: ${decodeURIComponent(phone)}\n` +
+        `Proyecto: ${decodeURIComponent(project)}\n\n` +
+        `Mensaje:\n${decodeURIComponent(message)}`
+      );
+      window.location.href = `mailto:pepe@meadowsfarms.com?subject=${subject}&body=${body}`;
+      return false;
+    }
+  </script>
+</body>
+</html>
