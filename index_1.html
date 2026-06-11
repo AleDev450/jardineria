@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pepe Ayulo | Premium Landscape Designer in Northern Virginia</title>
+<meta name="description" content="Pepe Ayulo, VA-certified horticulturist with 15+ years of experience and 2,500+ landscaping projects: garden design, patios, retaining walls, irrigation and outdoor lighting in Loudoun and Fairfax. Request your free consultation.">
+<meta name="keywords" content="landscaping, landscape design, garden design, patios, retaining walls, irrigation systems, outdoor lighting, Virginia, Loudoun, Fairfax">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Pepe Ayulo">
+<link rel="canonical" href="https://www.example.com/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Pepe Ayulo | Landscape Design Specialist in Virginia">
+<meta property="og:description" content="2,500+ projects completed. Garden design, patios, walls, irrigation and outdoor lighting in Northern Virginia. Free consultation.">
+<meta property="og:image" content="https://www.meadowsfarms.com/wp-content/uploads/2022/05/hero-waterfall.jpg">
+<meta property="og:url" content="https://www.example.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pepe Ayulo | Premium Landscaping">
+<meta name="twitter:description" content="High-end landscape and garden design in Virginia. 15+ years of experience.">
+<meta name="twitter:image" content="https://www.meadowsfarms.com/wp-content/uploads/2022/05/hero-waterfall.jpg">
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Pepe Ayulo — Landscape & Garden Design",
+  "image": "https://www.meadowsfarms.com/wp-content/uploads/2022/05/hero-waterfall.jpg",
+  "description": "Premium garden design, residential and commercial landscaping, patios, walls, irrigation and outdoor lighting services.",
+  "telephone": "+1-703-327-3940",
+  "areaServed": ["Loudoun, Virginia", "Fairfax, Virginia"],
+  "address": { "@type": "PostalAddress", "addressRegion": "Virginia", "addressCountry": "US" },
+  "priceRange": "$$",
+  "employee": {
+    "@type": "Person",
+    "name": "Pepe Ayulo",
+    "jobTitle": "Landscape Designer / VA-Certified Horticulturist",
+    "image": "https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe-picture.jpg"
+  },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "320" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,640;1,9..144,460&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pine:#1b2b21;
+  --pine-soft:#27392d;
+  --moss:#45694a;
+  --leaf:#7fae6b;
+  --brote:#b9d68a;
+  --dusk:#d9a05b;
+  --stone:#f1efe8;
+  --paper:#fbfaf6;
+  --line:rgba(27,43,33,.12);
+  --r-leaf:0 44px 0 44px;          /* radio "hoja": esquinas opuestas */
+  --shadow:0 18px 50px -18px rgba(27,43,33,.28);
+  --ff-display:"Fraunces",Georgia,serif;
+  --ff-body:"Instrument Sans",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-body);color:var(--pine);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.container{width:min(1180px,92%);margin-inline:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:.55rem;font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--moss)}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--dusk)}
+h1,h2,h3{font-family:var(--ff-display);font-weight:560;line-height:1.12;letter-spacing:-.01em}
+h2{font-size:clamp(1.9rem,3.6vw,2.9rem);margin:.7rem 0 1rem}
+.section{padding:clamp(4rem,8vw,7rem) 0}
+.section-head{max-width:640px;margin-bottom:clamp(2.2rem,5vw,3.6rem)}
+.section-head p{color:#54625a}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.8rem;border-radius:0 18px 0 18px;font-weight:600;font-size:.95rem;transition:transform .25s,box-shadow .25s,background .25s;cursor:pointer;border:0}
+.btn-primary{background:var(--leaf);color:var(--pine)}
+.btn-primary:hover{background:var(--brote);transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(127,174,107,.7)}
+.btn-ghost{border:1.5px solid rgba(251,250,246,.5);color:#fbfaf6;background:transparent}
+.btn-ghost:hover{border-color:var(--brote);color:var(--brote)}
+:focus-visible{outline:3px solid var(--dusk);outline-offset:3px}
+
+/* ---------- LOADER: árbol que brota hoja por hoja ---------- */
+#loader{position:fixed;inset:0;z-index:1000;background:var(--pine);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;transition:opacity .7s,visibility .7s}
+#loader.hidden{opacity:0;visibility:hidden}
+#loader p{color:var(--brote);font-family:var(--ff-display);font-style:italic;font-size:1.05rem;letter-spacing:.04em}
+#loader .bar{width:140px;height:2px;background:rgba(185,214,138,.2);overflow:hidden;border-radius:2px}
+#loader .bar span{display:block;height:100%;width:40%;background:var(--brote);animation:slide 1.1s ease-in-out infinite}
+@keyframes slide{0%{transform:translateX(-110%)}100%{transform:translateX(360%)}}
+.tree-trunk{fill:none;stroke:var(--dusk);stroke-width:6;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420;animation:trunk 1.4s ease forwards}
+@keyframes trunk{to{stroke-dashoffset:0}}
+.tree-leaf{fill:var(--leaf);opacity:0;transform-origin:center;transform:scale(0) rotate(-30deg);animation:sprout .55s cubic-bezier(.34,1.56,.64,1) forwards}
+.tree-leaf:nth-child(even){fill:var(--brote)}
+@keyframes sprout{to{opacity:1;transform:scale(1) rotate(0)}}
+
+/* ---------- HEADER ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:900;transition:background .35s,box-shadow .35s;padding:1.1rem 0}
+header.scrolled{background:rgba(27,43,33,.92);backdrop-filter:blur(10px);box-shadow:0 6px 24px rgba(0,0,0,.18);padding:.7rem 0}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:.6rem;color:#fbfaf6;font-family:var(--ff-display);font-size:1.25rem}
+.logo svg{width:30px;height:30px}
+.nav-links{display:flex;gap:2rem;font-size:.92rem;font-weight:500;color:rgba(251,250,246,.85)}
+.nav-links a{position:relative;padding:.2rem 0}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:2px;background:var(--brote);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-cta{display:none}
+@media(min-width:980px){.nav-cta{display:inline-flex;padding:.6rem 1.2rem;font-size:.85rem}}
+.burger{display:none;background:none;border:0;cursor:pointer;width:40px;height:40px;position:relative;z-index:60}
+.burger span{display:block;width:24px;height:2px;background:#fbfaf6;margin:5px auto;transition:.3s}
+@media(max-width:840px){
+  .burger{display:block}
+  .nav-links{position:fixed;inset:0;background:var(--pine);flex-direction:column;align-items:center;justify-content:center;gap:2.2rem;font-size:1.2rem;transform:translateX(100%);transition:transform .4s}
+  .nav-links.open{transform:translateX(0)}
+  body.menu-open{overflow:hidden}
+}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fbfaf6;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(27,43,33,.55) 0%,rgba(27,43,33,.15) 40%,rgba(27,43,33,.88) 100%)}
+.hero-inner{padding:9rem 0 5rem;display:grid;gap:1.4rem;max-width:760px}
+.hero .eyebrow{color:var(--brote)}
+.hero .eyebrow::before{background:var(--brote)}
+.hero h1{font-size:clamp(2.5rem,6vw,4.4rem);color:#fbfaf6}
+.hero h1 em{font-style:italic;font-weight:460;color:var(--brote)}
+.hero p{font-size:clamp(1rem,1.6vw,1.2rem);max-width:560px;color:rgba(251,250,246,.88)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:.5rem}
+.hero-badge{display:flex;flex-wrap:wrap;gap:2.4rem;margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid rgba(251,250,246,.25);font-size:.85rem;color:rgba(251,250,246,.8)}
+.hero-badge b{display:block;font-family:var(--ff-display);font-size:1.5rem;color:#fbfaf6}
+
+/* ---------- ABOUT ---------- */
+.about{background:var(--paper)}
+.about-grid{display:grid;gap:3rem;align-items:center}
+@media(min-width:920px){.about-grid{grid-template-columns:.85fr 1.15fr;gap:4.5rem}}
+.about-photo{position:relative}
+.about-photo img{border-radius:var(--r-leaf);box-shadow:var(--shadow);width:100%;object-fit:cover;aspect-ratio:4/5}
+.about-photo .stamp{position:absolute;right:-14px;bottom:-14px;background:var(--pine);color:var(--brote);font-family:var(--ff-display);font-style:italic;padding:1rem 1.4rem;border-radius:0 22px 0 22px;font-size:.95rem;box-shadow:var(--shadow)}
+.about-body p{color:#54625a;margin-bottom:1rem}
+.about-quote{border-left:3px solid var(--dusk);padding:.4rem 0 .4rem 1.2rem;margin:1.4rem 0;font-family:var(--ff-display);font-style:italic;font-size:1.12rem;color:var(--pine-soft)}
+.certs{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.4rem 0 2rem}
+.certs li{font-size:.82rem;font-weight:600;background:var(--stone);border:1px solid var(--line);padding:.45rem .9rem;border-radius:0 12px 0 12px;display:flex;gap:.45rem;align-items:center}
+.certs svg{width:14px;height:14px;color:var(--moss)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.stat{background:var(--pine);color:var(--paper);padding:1.4rem 1.2rem;border-radius:0 20px 0 20px;text-align:left}
+.stat b{font-family:var(--ff-display);font-size:clamp(1.6rem,2.6vw,2.3rem);display:block;color:var(--brote)}
+.stat span{font-size:.8rem;color:rgba(251,250,246,.75)}
+@media(max-width:560px){.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}}
+
+/* ---------- SERVICES ---------- */
+.services{background:var(--stone)}
+.services-grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.service{background:var(--paper);border:1px solid var(--line);border-radius:0 26px 0 26px;padding:1.7rem 1.5rem;transition:transform .3s,box-shadow .3s,border-color .3s}
+.service:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--leaf)}
+.service .ico{width:48px;height:48px;border-radius:0 14px 0 14px;background:var(--pine);color:var(--brote);display:grid;place-items:center;margin-bottom:1rem}
+.service .ico svg{width:24px;height:24px}
+.service h3{font-size:1.12rem;margin-bottom:.4rem}
+.service p{font-size:.9rem;color:#54625a}
+
+/* ---------- GALLERY ---------- */
+.gallery-feature{display:grid;gap:0;border-radius:var(--r-leaf);overflow:hidden;box-shadow:var(--shadow);margin-bottom:2.2rem;background:var(--pine);color:var(--paper)}
+@media(min-width:880px){.gallery-feature{grid-template-columns:1.3fr .7fr}}
+.gallery-feature img{width:100%;height:100%;object-fit:cover;min-height:300px}
+.gallery-feature .gf-text{padding:clamp(1.6rem,3vw,2.8rem);display:flex;flex-direction:column;justify-content:center;gap:.8rem}
+.gallery-feature h3{font-size:1.5rem;color:#fbfaf6}
+.gallery-feature p{color:rgba(251,250,246,.8);font-size:.95rem}
+.gf-text .eyebrow{color:var(--brote)}.gf-text .eyebrow::before{background:var(--dusk)}
+.gallery-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.g-item{position:relative;overflow:hidden;border-radius:0 22px 0 22px;cursor:zoom-in;aspect-ratio:4/3;border:0;padding:0;background:var(--stone)}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.g-item:hover img{transform:scale(1.07)}
+.g-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:2.2rem 1rem .9rem;background:linear-gradient(transparent,rgba(27,43,33,.85));color:#fbfaf6;font-size:.85rem;font-weight:600;opacity:0;transform:translateY(8px);transition:.35s}
+.g-item:hover figcaption{opacity:1;transform:none}
+/* lightbox */
+#lightbox{position:fixed;inset:0;z-index:950;background:rgba(20,30,24,.94);display:none;align-items:center;justify-content:center;padding:4vh 4vw}
+#lightbox.open{display:flex}
+#lightbox img{max-width:92vw;max-height:86vh;border-radius:0 26px 0 26px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+#lightbox button{position:absolute;top:1.2rem;right:1.4rem;background:none;border:0;color:#fbfaf6;font-size:2.4rem;cursor:pointer;line-height:1}
+
+/* ---------- PROCESS ---------- */
+.process{background:var(--pine);color:var(--paper)}
+.process .eyebrow{color:var(--brote)}.process .eyebrow::before{background:var(--dusk)}
+.process h2{color:#fbfaf6}
+.process .section-head p{color:rgba(251,250,246,.75)}
+.steps{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));counter-reset:paso}
+.step{position:relative;background:var(--pine-soft);border:1px solid rgba(185,214,138,.18);border-radius:0 22px 0 22px;padding:1.6rem 1.3rem 1.4rem}
+.step::before{counter-increment:paso;content:"Paso " counter(paso);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dusk)}
+.step h3{font-size:1.08rem;margin:.55rem 0 .45rem;color:#fbfaf6}
+.step p{font-size:.86rem;color:rgba(251,250,246,.72)}
+.step .leafmark{position:absolute;top:1.2rem;right:1.2rem;width:18px;height:18px;color:var(--leaf)}
+
+/* ---------- TESTIMONIALS ---------- */
+.testimonials{background:var(--paper)}
+.t-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.t-card{background:var(--stone);border:1px solid var(--line);border-radius:var(--r-leaf);padding:1.9rem 1.7rem;display:flex;flex-direction:column;gap:1rem}
+.t-card .stars{color:var(--dusk);letter-spacing:.18em;font-size:.9rem}
+.t-card blockquote{font-family:var(--ff-display);font-style:italic;font-size:1.08rem;color:var(--pine-soft);line-height:1.5}
+.t-card footer{display:flex;align-items:center;gap:.8rem;font-size:.85rem}
+.t-card footer .avatar{width:42px;height:42px;border-radius:0 12px 0 12px;background:var(--moss);color:#fbfaf6;display:grid;place-items:center;font-family:var(--ff-display);font-size:1rem}
+.t-card footer b{display:block}
+.t-card footer span{color:#54625a}
+
+/* ---------- COVERAGE ---------- */
+.coverage{background:var(--stone)}
+.cov-grid{display:grid;gap:2.4rem;align-items:center}
+@media(min-width:920px){.cov-grid{grid-template-columns:.9fr 1.1fr}}
+.cov-list li{display:flex;gap:.7rem;align-items:center;padding:.7rem 0;border-bottom:1px dashed var(--line);font-weight:500}
+.cov-list svg{width:18px;height:18px;color:var(--moss);flex:none}
+.cov-map{border-radius:var(--r-leaf);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+.cov-map iframe{display:block;width:100%;height:430px;border:0}
+
+/* ---------- CONTACT ---------- */
+.contact{background:var(--paper)}
+.contact-grid{display:grid;gap:2.6rem}
+@media(min-width:920px){.contact-grid{grid-template-columns:.85fr 1.15fr}}
+.c-info li{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.3rem}
+.c-info .ico{width:44px;height:44px;flex:none;border-radius:0 14px 0 14px;background:var(--pine);color:var(--brote);display:grid;place-items:center}
+.c-info .ico svg{width:20px;height:20px}
+.c-info b{display:block;font-size:.95rem}
+.c-info span,.c-info a{font-size:.9rem;color:#54625a}
+.c-info a:hover{color:var(--moss)}
+.form{background:var(--stone);border:1px solid var(--line);border-radius:var(--r-leaf);padding:clamp(1.6rem,3vw,2.6rem);display:grid;gap:1rem}
+.form .row{display:grid;gap:1rem}
+@media(min-width:640px){.form .row{grid-template-columns:1fr 1fr}}
+.form label{font-size:.82rem;font-weight:600;display:block;margin-bottom:.35rem}
+.form input,.form select,.form textarea{width:100%;padding:.85rem 1rem;border:1px solid var(--line);border-radius:0 12px 0 12px;background:#fff;font-family:inherit;font-size:.92rem;color:var(--pine);transition:border-color .25s,box-shadow .25s}
+.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--leaf);box-shadow:0 0 0 3px rgba(127,174,107,.25)}
+.form textarea{min-height:120px;resize:vertical}
+.form-msg{display:none;background:#e6f2dc;border:1px solid var(--leaf);color:var(--pine);padding:.9rem 1.1rem;border-radius:0 12px 0 12px;font-size:.9rem}
+
+/* ---------- FOOTER ---------- */
+footer.site{background:var(--pine);color:rgba(251,250,246,.75);padding:3rem 0 2rem;font-size:.88rem}
+.f-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem;align-items:center;border-bottom:1px solid rgba(251,250,246,.14);padding-bottom:1.6rem;margin-bottom:1.4rem}
+footer.site .logo{font-size:1.1rem}
+.f-bottom{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+
+/* ---------- WHATSAPP FLOAT ---------- */
+.wa-float{position:fixed;right:1.4rem;bottom:1.4rem;z-index:800;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 28px -8px rgba(37,211,102,.6);transition:transform .3s}
+.wa-float:hover{transform:scale(1.1)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+.wa-float::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid #25d366;opacity:.5;animation:pulse 2s infinite}
+@keyframes pulse{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.25);opacity:0}}
+
+/* ---------- REVEAL ON SCROLL ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<!-- ================= LOADER: árbol hoja por hoja ================= -->
+<div id="loader" aria-hidden="true">
+  <svg width="150" height="170" viewBox="0 0 150 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Growing tree">
+    <!-- tronco y ramas -->
+    <path class="tree-trunk" d="M75 162 V96 M75 118 C75 118 56 110 46 92 M75 110 C75 110 96 104 106 84 M75 96 C75 96 64 84 60 64 M75 96 C75 96 88 82 92 60 M75 96 V52"/>
+    <!-- hojas (brotan una por una via animation-delay) -->
+    <ellipse class="tree-leaf" style="animation-delay:.55s"  cx="44" cy="86" rx="11" ry="7"  transform="rotate(-38 44 86)"/>
+    <ellipse class="tree-leaf" style="animation-delay:.75s"  cx="108" cy="78" rx="11" ry="7" transform="rotate(34 108 78)"/>
+    <ellipse class="tree-leaf" style="animation-delay:.95s"  cx="57" cy="56" rx="11" ry="7"  transform="rotate(-52 57 56)"/>
+    <ellipse class="tree-leaf" style="animation-delay:1.15s" cx="95" cy="52" rx="11" ry="7"  transform="rotate(48 95 52)"/>
+    <ellipse class="tree-leaf" style="animation-delay:1.35s" cx="75" cy="42" rx="12" ry="8"  transform="rotate(0 75 42)"/>
+    <ellipse class="tree-leaf" style="animation-delay:1.55s" cx="60" cy="34" rx="10" ry="6.5" transform="rotate(-28 60 34)"/>
+    <ellipse class="tree-leaf" style="animation-delay:1.75s" cx="90" cy="32" rx="10" ry="6.5" transform="rotate(26 90 32)"/>
+    <ellipse class="tree-leaf" style="animation-delay:1.95s" cx="75" cy="22" rx="9" ry="6"   transform="rotate(0 75 22)"/>
+  </svg>
+  <p>Growing your outdoor space…</p>
+  <div class="bar"><span></span></div>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header id="top">
+  <div class="container nav">
+    <a class="logo" href="#top" aria-label="Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 22V10"/><path d="M12 10C12 5 8 3 4 3c0 5 3 8 8 7Z" fill="#7fae6b" stroke="#7fae6b"/><path d="M12 14c0-4 3.5-6 8-6 0 4.5-3 7-8 6Z" fill="#b9d68a" stroke="#b9d68a"/></svg>
+      Pepe Ayulo <span style="font-family:var(--ff-body);font-size:.7rem;letter-spacing:.2em;opacity:.7;margin-left:.2rem">LANDSCAPE DESIGN</span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#sobre">About</a></li>
+        <li><a href="#servicios">Services</a></li>
+        <li><a href="#proyectos">Projects</a></li>
+        <li><a href="#proceso">Process</a></li>
+        <li><a href="#cobertura">Service Area</a></li>
+        <li><a href="#contacto">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#contacto" class="btn btn-primary nav-cta">Free consultation</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/hero-waterfall.jpg" alt="Natural stone waterfall flowing into a pond surrounded by lush greenery" fetchpriority="high">
+  </div>
+  <div class="container hero-inner">
+    <span class="eyebrow">Premium landscaping · Northern Virginia</span>
+    <h1>Meet your <em>landscape design</em> specialist</h1>
+    <p>Pepe Ayulo, a VA-certified horticulturist with 15+ years transforming outdoor spaces: gardens, patios, walls, water features and lighting that raise the value of your home.</p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn btn-primary">Request a free consultation</a>
+      <a href="#proyectos" class="btn btn-ghost">View projects</a>
+    </div>
+    <div class="hero-badge">
+      <div><b>2,500+</b>projects designed &amp; installed</div>
+      <div><b>15+</b>years of experience</div>
+      <div><b>98%</b>satisfied clients</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SOBRE ================= -->
+<section class="section about" id="sobre">
+  <div class="container about-grid">
+    <div class="about-photo reveal">
+      <img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe-picture.jpg" alt="Portrait of Pepe Ayulo, landscape designer" loading="lazy">
+      <div class="stamp">VA-Certified Horticulturist</div>
+    </div>
+    <div class="about-body reveal">
+      <span class="eyebrow">About the specialist</span>
+      <h2>From sketch to garden, one trusted designer</h2>
+      <p>Pepe Ayulo is a Virginia-certified horticulturist and landscape designer. While earning his Bachelor of Science degree, he excelled in woody plants, perennials, site analysis and planning, turf management, and landscape design.</p>
+      <p>His hands-on experience covers plantings, screening trees, around-pool landscaping, patios, decorative walls, drainage, sodding, outdoor carpentry, water features, irrigation systems and exterior lighting — from small jobs to large estates.</p>
+      <blockquote class="about-quote">&ldquo;I began my career in the green industry at age 19. My goal is friendly, professional service &mdash; if you hire us, I personally make sure your project goes smoothly from start to finish.&rdquo;</blockquote>
+      <ul class="certs">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>VA-Certified Horticulturist</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>B.S. — Horticulture &amp; Design</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Full design + installation</li>
+      </ul>
+      <div class="stats">
+        <div class="stat"><b><span class="count" data-target="2500">0</span>+</b><span>projects completed</span></div>
+        <div class="stat"><b><span class="count" data-target="15">0</span>+</b><span>years of experience</span></div>
+        <div class="stat"><b><span class="count" data-target="98">0</span>%</b><span>satisfied clients</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICIOS ================= -->
+<section class="section services" id="servicios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Services</span>
+      <h2>Everything your outdoor space needs, one team</h2>
+      <p>Design, installation and maintenance with premium materials and a guarantee on plants and workmanship.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 19V5"/><path d="M12 9c0-3-2.5-5-6-5 0 3.5 2.5 6 6 5Z"/><path d="M12 13c0-3 2.5-5 6-5 0 3.5-2.5 6-6 5Z"/><path d="M5 19h14"/></svg></div><h3>Garden Design</h3><p>Custom scaled plans that balance plant species, light and lifestyle.</p></article>
+      <article class="service reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v9h14v-9"/><path d="M9 19v-5h6v5"/></svg></div><h3>Residential Landscaping</h3><p>Front yards, backyards and green areas that elevate your home.</p></article>
+      <article class="service reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 21V7l6-3v17"/><path d="M10 21V11l6-2v12"/><path d="M16 21v-8l4-1v9"/><path d="M2 21h20"/></svg></div><h3>Commercial Landscaping</h3><p>Corporate grounds and HOAs with planned, reliable upkeep.</p></article>
+      <article class="service reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 1 1-12 0c0-3.5 3-7 6-11Z"/><path d="M9 14a3 3 0 0 0 3 3"/></svg></div><h3>Irrigation Systems</h3><p>Smart irrigation and drainage that protect every plant and your bill.</p></article>
+      <article class="service reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 20h18"/><path d="M4 20c1-6 3-9 8-9s7 3 8 9"/><path d="M7 11V8M12 9V5M17 11V8"/></svg></div><h3>Sod &amp; Lawn Installation</h3><p>Sodding and seeding with professional grading and soil prep.</p></article>
+      <article class="service reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 15-5 5"/><path d="M14.5 4.5 19 9l-7 7-4.5-4.5z"/><path d="M16 7l3-3"/></svg></div><h3>Professional Pruning</h3><p>Shaping and plant health care for trees, hedges and shrubs.</p></article>
+      <article class="service reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7c1.5 1 1.5 3 0 4M12 6c1.5 1 1.5 3 0 4M16 7c1.5 1 1.5 3 0 4M8 14c1.5 1 1.5 3 0 4M12 13c1.5 1 1.5 3 0 4"/></svg></div><h3>Vertical Gardens</h3><p>Living walls and climbing plants for modern patios and facades.</p></article>
+      <article class="service reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.7 1 1.5 1 2.5h6c0-1 .2-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg></div><h3>Outdoor Lighting</h3><p>Warm light for walkways, facades and gardens that shine at night.</p></article>
+      <article class="service reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 21a9 9 0 1 0-9-9"/><path d="M3 12c3 0 4 2 4 4M12 21c0-3-2-4-4-4"/><path d="M12 7v5l3 3"/></svg></div><h3>Grounds Maintenance</h3><p>Monthly plans: mowing, fertilizing, pest control and monitoring.</p></article>
+    </div>
+  </div>
+</section>
+<!-- ================= GALERÍA ================= -->
+<section class="section" id="proyectos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Project gallery</span>
+      <h2>Real work, in real backyards</h2>
+      <p>A selection of patios, walls, gardens and lighting installed by Pepe and his crew.</p>
+    </div>
+
+    <div class="gallery-feature reveal">
+      <img src="https://www.meadowsfarms.com/wp-content/uploads/2022/08/landscape-design-mockup-1024x737.jpg" alt="Finished garden with the original design sketch overlay" loading="lazy">
+      <div class="gf-text">
+        <span class="eyebrow">From sketch to reality</span>
+        <h3>Every project starts on paper</h3>
+        <p>Before a single stone is moved, you receive a scaled design of your space. What you approve on paper is exactly what we build in your yard.</p>
+        <a href="#contacto" class="btn btn-primary" style="align-self:flex-start">Get my design</a>
+      </div>
+    </div>
+
+    <div class="gallery-grid">
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe1-1200x900-1-1024x768.jpg" alt="Curved stacked-stone retaining wall beside a house and lawn" loading="lazy"><figcaption>Retaining wall · Stacked stone</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe2-1200x900-1-1024x768.jpg" alt="Curved stone wall bordering a patio with pink and red flowers" loading="lazy"><figcaption>Flowering border planting</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe3-1024x768.jpg" alt="Raised stone patio with stairs and mulched flower bed" loading="lazy"><figcaption>Raised patio · Hardscape</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe6-1200x900-1-1024x768.jpg" alt="Stone tile patio with white staircase to a raised deck" loading="lazy"><figcaption>Integrated patio + deck</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe7-1200x900-1-1024x768.jpg" alt="Backyard with gray and reddish stone pavers and a curved bench" loading="lazy"><figcaption>Paver patio with stone bench</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe9-1200x891-1-1024x760.jpg" alt="Backyard corner with evergreen trees and a stone path" loading="lazy"><figcaption>Privacy screen · Evergreens</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe10.jpg" alt="Two-story house lit at night with front yard landscaping" loading="lazy"><figcaption>Outdoor lighting at night</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe11.jpg" alt="White house with lit porch, walkway and landscaped yard at dusk" loading="lazy"><figcaption>Facade lighting at dusk</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe13-1200x900-1-1024x768.jpg" alt="Courtyard with brick walls, stone benches and garden beds" loading="lazy"><figcaption>Courtyard · Minimalist design</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe16-1200x900-1-1024x768.jpg" alt="Stacked-stone retaining wall along a brick building" loading="lazy"><figcaption>Retaining wall &amp; drainage</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe17-1200x900-1-1024x768.jpg" alt="Stone walkway with dark brick border and steps" loading="lazy"><figcaption>Stone walkway with steps</figcaption></button>
+      <button class="g-item reveal" type="button"><img src="https://www.meadowsfarms.com/wp-content/uploads/2022/05/pepe2-583x1024.jpg" alt="Garden with dry creek bed, purple flowers and a glass birdbath" loading="lazy"><figcaption>Dry creek bed · Natural style</figcaption></button>
+    </div>
+  </div>
+</section>
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged project view"><button type="button" aria-label="Close">&times;</button><img src="" alt=""></div>
+
+<!-- ================= PROCESO ================= -->
+<section class="section process" id="proceso">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How we work</span>
+      <h2>Five steps, zero surprises</h2>
+      <p>A method proven across 2,500+ projects, so you know exactly what happens at every stage.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><svg class="leafmark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21c6-2 9-7 9-15-8 0-13 3-15 9 3-1 6-1 9 0-4 0-7 2-8 6h5Z"/></svg><h3>Initial Consultation</h3><p>We visit your property, listen to your ideas and assess soil, light and drainage.</p></div>
+      <div class="step reveal"><svg class="leafmark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21c6-2 9-7 9-15-8 0-13 3-15 9 3-1 6-1 9 0-4 0-7 2-8 6h5Z"/></svg><h3>Custom Design</h3><p>We create a scaled plan with plant selections, materials and living zones.</p></div>
+      <div class="step reveal"><svg class="leafmark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21c6-2 9-7 9-15-8 0-13 3-15 9 3-1 6-1 9 0-4 0-7 2-8 6h5Z"/></svg><h3>Project Presentation</h3><p>We review the design and estimate together, refining until you approve.</p></div>
+      <div class="step reveal"><svg class="leafmark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21c6-2 9-7 9-15-8 0-13 3-15 9 3-1 6-1 9 0-4 0-7 2-8 6h5Z"/></svg><h3>Installation</h3><p>In-house crews, guaranteed materials and a clear timeline.</p></div>
+      <div class="step reveal"><svg class="leafmark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21c6-2 9-7 9-15-8 0-13 3-15 9 3-1 6-1 9 0-4 0-7 2-8 6h5Z"/></svg><h3>Follow-up &amp; Maintenance</h3><p>We support your garden as it grows with check-ins and care plans.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIOS ================= -->
+<section class="section testimonials" id="testimonios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Testimonials</span>
+      <h2>What our clients say</h2>
+    </div>
+    <div class="t-grid">
+      <article class="t-card reveal">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>&ldquo;Pepe was a pleasure to work with &mdash; we will definitely be doing more projects with his team!&rdquo;</blockquote>
+        <footer><div class="avatar">EL</div><div><b>Erin L.</b><span>Aldie, VA</span></div></footer>
+      </article>
+      <article class="t-card reveal">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>&ldquo;Wonderful to work with! He listened to every request and delivered a design that was exactly what we envisioned.&rdquo;</blockquote>
+        <footer><div class="avatar">SD</div><div><b>Sara &amp; Dan W.</b><span>Chantilly, VA</span></div></footer>
+      </article>
+      <article class="t-card reveal">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>&ldquo;Pepe has worked with us before and, as always, the job was excellent from start to finish.&rdquo;</blockquote>
+        <footer><div class="avatar">PH</div><div><b>Patrick H.</b><span>Fairfax, VA</span></div></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COBERTURA ================= -->
+<section class="section coverage" id="cobertura">
+  <div class="container cov-grid">
+    <div class="reveal">
+      <span class="eyebrow">Service area</span>
+      <h2>Proudly serving Northern Virginia</h2>
+      <p style="color:#54625a;margin-bottom:1.4rem">Design, installation and maintenance throughout Loudoun and Fairfax counties and nearby communities.</p>
+      <ul class="cov-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Fairfax County</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Loudoun County</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Chantilly · South Riding</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Leesburg · Ashburn</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Aldie · Herndon · Reston</li>
+      </ul>
+    </div>
+    <div class="cov-map reveal">
+      <iframe title="Service area map: Loudoun and Fairfax counties, Virginia" src="https://www.openstreetmap.org/export/embed.html?bbox=-77.95%2C38.65%2C-77.05%2C39.25&layer=mapnik&marker=38.95%2C-77.45" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACTO ================= -->
+<section class="section contact" id="contacto">
+  <div class="container contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Contact</span>
+      <h2>Start with a free consultation</h2>
+      <p style="color:#54625a;margin-bottom:1.8rem">Tell us about your space and schedule a 1&ndash;2 hour on-site visit with our designer.</p>
+      <ul class="c-info">
+        <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 1.9Z"/></svg></div><div><b>Phone</b><a href="tel:+17033273940">+1 703 327 3940</a></div></li>
+        <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div><div><b>Email</b><a href="mailto:hello@pepeayulo-landscaping.com">hello@pepeayulo-landscaping.com</a></div></li>
+        <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><div><b>Location</b><span>Chantilly, Virginia &mdash; serving Loudoun &amp; Fairfax</span></div></li>
+        <li><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><div><b>Hours</b><span>Mon &ndash; Sat &middot; 8:00 am to 6:00 pm</span></div></li>
+      </ul>
+    </div>
+    <form class="form reveal" id="contactForm" novalidate>
+      <div class="row">
+        <div><label for="f-nombre">Full name *</label><input id="f-nombre" name="name" type="text" required autocomplete="name" placeholder="Your name"></div>
+        <div><label for="f-tel">Phone *</label><input id="f-tel" name="phone" type="tel" required autocomplete="tel" placeholder="(555) 000-0000"></div>
+      </div>
+      <div class="row">
+        <div><label for="f-email">Email address *</label><input id="f-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com"></div>
+        <div><label for="f-servicio">Service of interest</label><select id="f-servicio" name="service"><option>Garden design</option><option>Residential landscaping</option><option>Commercial landscaping</option><option>Patios &amp; walls</option><option>Irrigation systems</option><option>Outdoor lighting</option><option>Maintenance</option><option>Other</option></select></div>
+      </div>
+      <div><label for="f-msg">Tell us about your project *</label><textarea id="f-msg" name="message" required placeholder="Approximate size of the space, ideas, estimated budget&hellip;"></textarea></div>
+      <div class="form-msg" id="formMsg">Thank you! We received your request and will get back to you within 24 hours.</div>
+      <button class="btn btn-primary" type="submit" style="justify-self:start">Send request</button>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site">
+  <div class="container">
+    <div class="f-grid">
+      <a class="logo" href="#top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 22V10"/><path d="M12 10C12 5 8 3 4 3c0 5 3 8 8 7Z" fill="#7fae6b" stroke="#7fae6b"/><path d="M12 14c0-4 3.5-6 8-6 0 4.5-3 7-8 6Z" fill="#b9d68a" stroke="#b9d68a"/></svg>
+        Pepe Ayulo Landscaping
+      </a>
+      <ul style="display:flex;gap:1.6rem;flex-wrap:wrap">
+        <li><a href="#sobre">About</a></li>
+        <li><a href="#servicios">Services</a></li>
+        <li><a href="#proyectos">Projects</a></li>
+        <li><a href="#contacto">Contact</a></li>
+      </ul>
+    </div>
+    <div class="f-bottom">
+      <span>© <span id="year"></span> Pepe Ayulo Landscaping. All rights reserved.</span>
+      <span>Premium landscape design &middot; Loudoun &amp; Fairfax, Virginia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= WHATSAPP FLOAT ================= -->
+<a class="wa-float" href="https://wa.me/17033273940?text=Hi%2C%20I%27d%20like%20a%20free%20landscaping%20consultation" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.3 7L4 29l7.2-2.3c1.9 1 4 1.6 6.2 1.3h.6c6.6 0 12-5.4 12-12S22.6 3 16 3zm7 17c-.3.8-1.7 1.6-2.4 1.7-.6.1-1.4.2-2.3-.1-.5-.2-1.2-.4-2.1-.8-3.7-1.6-6.1-5.3-6.3-5.6-.2-.2-1.5-2-1.5-3.8s1-2.7 1.3-3c.3-.4.7-.5 1-.5h.7c.2 0 .5-.1.8.6.3.8 1.1 2.7 1.2 2.8.1.2.2.4 0 .7-.1.3-.2.4-.4.7l-.6.7c-.2.2-.4.4-.2.8.2.4 1 1.7 2.2 2.7 1.5 1.4 2.8 1.8 3.2 2 .4.2.6.1.9-.1.2-.3 1-1.2 1.3-1.6.3-.4.5-.3.9-.2.4.1 2.2 1 2.6 1.2.4.2.6.3.7.5.1.2.1.9-.2 1.7z"/></svg>
+</a>
+
+<script>
+// ---------- Loader: oculta cuando la página carga (mínimo 2.4s para ver el árbol brotar) ----------
+(function(){
+  var loader=document.getElementById('loader'), start=Date.now(), MIN=2400;
+  function hide(){
+    var wait=Math.max(0,MIN-(Date.now()-start));
+    setTimeout(function(){loader.classList.add('hidden');document.body.style.overflow='';},wait);
+  }
+  document.body.style.overflow='hidden';
+  if(document.readyState==='complete'){hide();}
+  else{window.addEventListener('load',hide);setTimeout(hide,6000);} // tope de seguridad
+})();
+
+// ---------- Header sticky ----------
+var header=document.querySelector('header');
+window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+
+// ---------- Menú móvil ----------
+var burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
+burger.addEventListener('click',function(){
+  var open=navLinks.classList.toggle('open');
+  document.body.classList.toggle('menu-open',open);
+  burger.setAttribute('aria-expanded',open);
+});
+navLinks.addEventListener('click',function(e){
+  if(e.target.tagName==='A'){navLinks.classList.remove('open');document.body.classList.remove('menu-open');}
+});
+
+// ---------- Reveal on scroll ----------
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+// ---------- Contadores animados ----------
+var statsDone=false;
+var io2=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting&&!statsDone){
+      statsDone=true;
+      document.querySelectorAll('.count').forEach(function(c){
+        var target=+c.dataset.target,startT=null,DUR=1600;
+        function tick(ts){
+          if(!startT)startT=ts;
+          var p=Math.min((ts-startT)/DUR,1);
+          c.textContent=Math.floor(target*(1-Math.pow(1-p,3))).toLocaleString('en-US');
+          if(p<1)requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+      io2.disconnect();
+    }
+  });
+},{threshold:.4});
+var statsEl=document.querySelector('.stats');
+if(statsEl)io2.observe(statsEl);
+
+// ---------- Lightbox galería ----------
+var lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img'),lbClose=lb.querySelector('button');
+document.querySelectorAll('.g-item').forEach(function(item){
+  item.addEventListener('click',function(){
+    var img=item.querySelector('img');
+    lbImg.src=img.src;lbImg.alt=img.alt;
+    lb.classList.add('open');document.body.style.overflow='hidden';
+  });
+});
+function closeLb(){lb.classList.remove('open');document.body.style.overflow='';}
+lbClose.addEventListener('click',closeLb);
+lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+
+// ---------- Formulario (demo front-end) ----------
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  if(!this.checkValidity()){this.reportValidity();return;}
+  document.getElementById('formMsg').style.display='block';
+  this.reset();
+});
+
+// ---------- Año footer ----------
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
