@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menú Digital QR — Sugu Rolls · Prototipo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap');
+  :root{
+    --red:#E0322E; --red-dark:#A8211E; --red-soft:#FCEBEB; --red-soft-text:#A32D2D;
+    --ink:#141414; --ink-soft:#2B2B2B;
+    --white:#FFFFFF; --surface:#FAFAF8; --surface-2:#F1EFEA; --border:#E4E1DA;
+    --text:#141414; --text-2:#7C7A73; --text-3:#A8A6A0;
+    --ok-bg:#E1F5EE; --ok-text:#0F6E56;
+    --wa:#25D366;
+    --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --display:'Archivo Black','Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:#E9E6DF;color:var(--text);-webkit-font-smoothing:antialiased;padding:40px 20px 80px;line-height:1.5}
+
+  .page-head{max-width:1240px;margin:0 auto 36px;text-align:center}
+  .brand{display:inline-flex;gap:3px;align-items:baseline;font-family:var(--display);font-size:30px;letter-spacing:.5px}
+  .brand .s1{color:var(--ink)} .brand .s2{color:var(--red)}
+  .page-head p{color:var(--text-2);font-size:15px;margin-top:8px}
+  .legend{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:18px;font-size:13px;color:var(--text-2)}
+  .legend span{display:inline-flex;gap:7px;align-items:center}
+  .dot{width:9px;height:9px;border-radius:50%}
+
+  .group-title{max-width:1240px;margin:46px auto 6px;font-size:13px;font-weight:700;letter-spacing:1.5px;color:var(--red);text-transform:uppercase}
+  .group-sub{max-width:1240px;margin:0 auto 22px;font-size:13px;color:var(--text-2)}
+
+  .stage{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px 36px;justify-content:center;align-items:flex-start}
+  .screen-block{display:flex;flex-direction:column;align-items:center;gap:14px}
+  .screen-label{font-size:13px;font-weight:600;color:var(--ink);text-align:center}
+  .screen-label small{display:block;font-weight:400;color:var(--text-2);margin-top:2px}
+
+  .phone{width:340px;height:720px;background:var(--surface);border-radius:40px;border:10px solid #1a1a1a;box-shadow:0 24px 60px rgba(0,0,0,.22);overflow:hidden;position:relative;display:flex;flex-direction:column}
+  .phone .scroll{flex:1;overflow-y:auto;display:flex;flex-direction:column;position:relative}
+  .phone .scroll::-webkit-scrollbar{width:0}
+
+  .desktop{width:760px;background:var(--white);border-radius:14px;border:1px solid #d9d6cf;box-shadow:0 24px 60px rgba(0,0,0,.18);overflow:hidden}
+  .desktop .topdots{background:var(--surface-2);padding:11px 14px;display:flex;gap:7px;border-bottom:1px solid var(--border)}
+  .desktop .topdots i{width:11px;height:11px;border-radius:50%;display:block}
+
+  /* ===== CLIENT ===== */
+  .c-topbar{background:var(--ink);padding:16px 18px;display:flex;align-items:center;justify-content:space-between}
+  .c-topbar .b{font-family:var(--display);font-size:17px;display:flex;gap:2px}
+  .c-topbar .b .s1{color:#fff}.c-topbar .b .s2{color:var(--red)}
+  .c-topbar .ic{color:#fff;font-size:17px;opacity:.85}
+  .c-hero{background:var(--ink);height:138px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .c-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 120%, rgba(224,50,46,.45), transparent 60%)}
+  .c-hero h1{font-family:var(--display);color:#fff;font-size:25px;letter-spacing:1px;z-index:1}
+  .c-hero p{color:#F0997B;font-size:12px;font-weight:500;margin-top:3px;z-index:1}
+  .venue{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.12);color:#fff;font-size:10px;font-weight:500;padding:3px 9px;border-radius:12px;margin-top:8px;z-index:1}
+  .c-chips{display:flex;gap:8px;padding:14px 14px 6px;overflow-x:auto}
+  .c-chips::-webkit-scrollbar{height:0}
+  .chip{white-space:nowrap;font-size:13px;padding:7px 14px;border-radius:20px;background:var(--surface-2);color:#444;cursor:pointer;border:none;font-family:var(--sans)}
+  .chip.on{background:var(--red);color:#fff;font-weight:500}
+  .c-sec{padding:10px 16px 6px}
+  .c-sec h2{font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .c-sec .promo-tag{background:var(--red);color:#fff;font-size:9px;font-weight:600;padding:2px 7px;border-radius:10px;letter-spacing:.4px}
+  .c-sec p{font-size:12px;color:var(--text-2);margin-top:3px;line-height:1.45}
+  .c-list{padding:6px 14px 14px;display:flex;flex-direction:column;gap:12px}
+  .pcard{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:16px;padding:10px;cursor:pointer;transition:transform .12s,border-color .12s}
+  .pcard:hover{transform:translateY(-2px);border-color:#cfccc4}
+  .pcard.feat{border:1.5px solid var(--red)}
+  .pcard.promo{border:1.5px solid var(--red);background:linear-gradient(180deg,#fff, #FFF6F5)}
+  .pcard .thumb{width:72px;height:72px;border-radius:12px;background:var(--surface-2);flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:26px;color:#B4B2A9;background-size:cover;background-position:center}
+  .pcard.feat .thumb,.pcard.promo .thumb{background:var(--red-soft);color:var(--red)}
+  .pcard .info{flex:1;min-width:0}
+  .pcard .nm{font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .badge{background:var(--red-soft);color:var(--red-soft-text);font-size:9px;font-weight:500;padding:2px 6px;border-radius:10px;letter-spacing:.3px}
+  .pcard .ds{font-size:11px;color:var(--text-2);line-height:1.4;margin:3px 0 6px}
+  .priceline{display:flex;align-items:baseline;gap:8px}
+  .pcard .pr{font-size:15px;font-weight:600;color:var(--red)}
+  .pcard .pr-old{font-size:12px;color:var(--text-3);text-decoration:line-through}
+
+  /* info section (full, at bottom) */
+  .c-info{margin:8px 14px 14px;background:var(--ink);border-radius:18px;padding:18px;color:#fff}
+  .c-info h3{font-size:15px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+  .inforow{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .inforow:last-child{border-bottom:none}
+  .inforow .ii{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex:0 0 auto}
+  .inforow .ii.wa{background:rgba(37,211,102,.18);color:var(--wa)}
+  .inforow .it{flex:1}
+  .inforow .it b{font-size:13px;font-weight:600;display:block}
+  .inforow .it span{font-size:11px;color:#B7B5AE}
+  .inforow .go{font-size:15px;color:#8b8a84}
+  .c-foot{background:var(--ink);text-align:center;color:#7C7A73;font-size:10px;padding:14px;border-top:1px solid rgba(255,255,255,.08)}
+
+  /* sticky bottom info bar */
+  .c-stickybar{position:sticky;bottom:0;display:flex;gap:8px;padding:10px 14px;background:rgba(250,250,248,.92);backdrop-filter:blur(8px);border-top:1px solid var(--border)}
+  .sb-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;font-weight:600;padding:10px;border-radius:12px;border:none;cursor:pointer;font-family:var(--sans)}
+  .sb-btn.wa{background:var(--wa);color:#fff}
+  .sb-btn.call{background:var(--ink);color:#fff}
+  .sb-btn.loc{background:#fff;color:var(--ink);border:1px solid var(--border)}
+
+  /* ===== DETAIL ===== */
+  .d-img{height:230px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:46px;color:#B4B2A9;position:relative}
+  .d-back{position:absolute;top:14px;left:14px;width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15);border:none}
+  .d-body{padding:18px;display:flex;flex-direction:column;gap:14px}
+  .d-titrow{display:flex;justify-content:space-between;align-items:center}
+  .d-titrow h1{font-size:20px;font-weight:700}
+  .d-titrow .pr{font-size:18px;font-weight:700;color:var(--red)}
+  .d-desc{font-size:13px;color:var(--text-2);line-height:1.5;margin-top:-6px}
+  .step{background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 14px}
+  .step .sh{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+  .step .num{width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .step .st{font-size:14px;font-weight:600}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{font-size:12px;padding:6px 10px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border);color:#444;cursor:pointer}
+  .opt.on{background:var(--red-soft);border-color:var(--red);color:var(--red-soft-text);font-weight:500}
+  .d-cta{padding:14px 18px;border-top:1px solid var(--border);background:#fff}
+  .d-cta button{width:100%;border:none;background:var(--red);color:#fff;font-size:15px;font-weight:600;padding:13px;border-radius:12px;cursor:pointer;font-family:var(--sans)}
+
+  /* ===== ADMIN ===== */
+  .adm{display:flex;min-height:500px}
+  .adm-side{width:172px;background:#161616;padding:16px 0;flex:0 0 auto}
+  .adm-side .b{font-family:var(--display);font-size:15px;padding:0 16px 18px;display:flex;gap:2px}
+  .adm-side .b .s1{color:#fff}.adm-side .b .s2{color:var(--red)}
+  .adm-nav{display:flex;align-items:center;gap:10px;padding:10px 16px;color:#8b8a84;font-size:13px;cursor:pointer}
+  .adm-nav .ic{width:17px;text-align:center}
+  .adm-nav.on{background:var(--red);color:#fff}
+  .adm-nav:not(.on):hover{color:#fff}
+  .adm-main{flex:1;background:var(--white);padding:20px 24px}
+  .adm-h{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+  .adm-h h1{font-size:18px;font-weight:600}
+  .adm-h p{font-size:12px;color:var(--text-2);margin-top:2px}
+  .btn-red{background:var(--red);color:#fff;border:none;font-size:13px;font-weight:600;padding:9px 14px;border-radius:8px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;font-family:var(--sans)}
+  .adm-tools{display:flex;gap:8px;margin-bottom:16px}
+  .adm-search{flex:1;height:34px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;padding:0 10px;gap:6px;color:var(--text-3);font-size:13px}
+  .adm-filter{height:34px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;padding:0 12px;gap:6px;color:var(--text-2);font-size:13px;cursor:pointer}
+  .adm-table{border:1px solid var(--border);border-radius:14px;overflow:hidden}
+  .arow{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--border)}
+  .arow:last-child{border-bottom:none}
+  .arow .th{width:44px;height:44px;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:19px;flex:0 0 auto}
+  .arow.feat .th{background:var(--red-soft);color:var(--red)}
+  .arow .nm{flex:1}
+  .arow .nm b{font-size:14px;font-weight:600;display:block}
+  .arow .nm span{font-size:12px;color:var(--text-2)}
+  .pill{font-size:11px;font-weight:500;padding:3px 9px;border-radius:12px}
+  .pill.on{background:var(--ok-bg);color:var(--ok-text)}
+  .pill.off{background:var(--surface-2);color:#5F5E5A}
+  .arow .act{color:var(--text-2);font-size:16px;cursor:pointer;padding:0 2px}
+  .arow .act:hover{color:var(--ink)}
+
+  /* menus manager (cards) */
+  .menus-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .menucard{border:1px solid var(--border);border-radius:14px;padding:16px;position:relative}
+  .menucard.active{border:1.5px solid var(--red);background:#FFF8F7}
+  .menucard .mtop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+  .menucard h3{font-size:15px;font-weight:600;display:flex;align-items:center;gap:7px}
+  .menucard .micon{width:30px;height:30px;border-radius:9px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:15px}
+  .menucard.active .micon{background:var(--red-soft);color:var(--red)}
+  .menucard .mmeta{font-size:12px;color:var(--text-2);line-height:1.6}
+  .menucard .mtags{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+  .mtag{font-size:11px;padding:3px 9px;border-radius:12px;background:var(--surface-2);color:#5F5E5A}
+  .mtag.live{background:var(--ok-bg);color:var(--ok-text);font-weight:500}
+  .menucard .mfoot{display:flex;gap:8px;margin-top:14px}
+  .mbtn{flex:1;font-size:12px;font-weight:500;padding:8px;border-radius:8px;border:1px solid var(--border);background:#fff;cursor:pointer;text-align:center;font-family:var(--sans);color:var(--text)}
+  .mbtn.qr{background:var(--ink);color:#fff;border:none}
+  .menucard.newcard{border:1.5px dashed #cfccc4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--text-2);cursor:pointer;min-height:150px}
+  .menucard.newcard .plus{width:40px;height:40px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--red)}
+
+  /* ===== EDITOR ===== */
+  .edt-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border)}
+  .edt-head h1{font-size:16px;font-weight:600}
+  .edt-head .x{font-size:18px;color:var(--text-2);cursor:pointer}
+  .edt-body{padding:20px}
+  .edt-top{display:flex;gap:18px;margin-bottom:18px}
+  .edt-imgcol{width:140px;flex:0 0 auto}
+  .lbl{font-size:12px;color:var(--text-2);margin-bottom:6px;display:block}
+  .imgbox{width:140px;height:140px;border-radius:8px;background:var(--surface-2);position:relative;display:flex;align-items:center;justify-content:center;font-size:36px;color:#B4B2A9;overflow:hidden}
+  .imgbox .change{position:absolute;bottom:8px;left:8px;right:8px;background:var(--ink);color:#fff;font-size:11px;padding:6px 0;border-radius:6px;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px;cursor:pointer}
+  .hint{font-size:10px;color:var(--text-3);margin-top:6px;line-height:1.4}
+  .edt-fields{flex:1}
+  .field{margin-bottom:14px}
+  .inp{height:36px;border:1px solid #cfccc4;border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:13px;background:#fff}
+  .inp.area{height:auto;min-height:58px;align-items:flex-start;padding:9px 10px;line-height:1.5}
+  .row2{display:flex;gap:14px}.row2>div{flex:1}
+  .tags{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+  .tag{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--text-2);cursor:pointer}
+  .tag.on{background:var(--red-soft);border-color:var(--red);color:var(--red-soft-text)}
+  .toggle-row{display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px}
+  .sw{width:38px;height:22px;background:var(--red);border-radius:12px;position:relative;cursor:pointer}
+  .sw.off{background:#cfccc4}
+  .sw i{width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px;display:block}
+  .sw.off i{right:auto;left:2px}
+  .edt-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}
+  .btn-ghost{border:1px solid #cfccc4;background:#fff;border-radius:8px;padding:9px 18px;font-size:13px;color:var(--text-2);cursor:pointer;font-family:var(--sans)}
+
+  /* ===== INFO ADMIN ===== */
+  .info-form{display:flex;flex-direction:column;gap:14px;max-width:460px}
+  .info-field .inp{height:38px}
+  .info-field .lbl{display:flex;align-items:center;gap:6px}
+
+  /* ===== QR ===== */
+  .qr-wrap{padding:36px;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .qr-venue{font-size:12px;font-weight:600;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+  .qr-card{background:var(--ink);border-radius:20px;padding:28px 32px;width:290px;display:flex;flex-direction:column;align-items:center;gap:13px}
+  .qr-card .b{font-family:var(--display);font-size:18px;display:flex;gap:2px}
+  .qr-card .b .s1{color:#fff}.qr-card .b .s2{color:var(--red)}
+  .qr-box{width:172px;height:172px;background:#fff;border-radius:14px;padding:13px;display:grid;place-items:center}
+  .qr-box svg{width:100%;height:100%}
+  .qr-card .scan{color:#fff;font-size:14px;font-weight:600}
+  .qr-card .url{color:#F0997B;font-size:12px}
+  .qr-actions{display:flex;gap:10px;margin-top:22px}
+
+  .tip{max-width:1240px;margin:48px auto 0;background:#fff;border:1px solid #d9d6cf;border-radius:14px;padding:22px 26px;font-size:14px;color:var(--text-2);line-height:1.7}
+  .tip b{color:var(--ink);font-weight:600}
+  .tip h4{color:var(--ink);font-size:15px;margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <div class="brand"><span class="s1">Sugu</span><span class="s2">Rolls</span></div>
+  <p>Menú digital QR · prototipo de pantallas — vista cliente y panel de administración</p>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--red)"></i>Acción principal</span>
+    <span><i class="dot" style="background:var(--ink)"></i>Superficies de marca</span>
+    <span><i class="dot" style="background:var(--wa)"></i>WhatsApp / contacto</span>
+    <span><i class="dot" style="background:var(--ok-text)"></i>Estado activo</span>
+  </div>
+</div>
+
+<!-- ================= CLIENTE ================= -->
+<div class="group-title">Vista del cliente</div>
+<div class="group-sub">Lo que ve al escanear el QR. El código siempre abre la misma carta — el de la feria abre la carta de feria, el del local la del local.</div>
+
+<div class="stage">
+
+  <!-- 1 · CARTA con info al final -->
+  <div class="screen-block">
+    <div class="screen-label">1 · Carta — info al final<small>versión A: sección completa abajo</small></div>
+    <div class="phone"><div class="scroll">
+      <div class="c-topbar"><div class="b"><span class="s1">Sugu</span><span class="s2">Rolls</span></div><div class="ic">⌕</div></div>
+      <div class="c-hero"><h1>SUGU ROLLS</h1><p>Sushi · Pokebowls · Nikkei</p><span class="venue">◓ Carta del local</span></div>
+      <div class="c-chips">
+        <button class="chip on">Promos</button>
+        <button class="chip">Pokebowls</button>
+        <button class="chip">Makis</button>
+        <button class="chip">Calientes</button>
+      </div>
+      <div class="c-sec"><h2>Promociones <span class="promo-tag">SOLO HOY</span></h2><p>Ofertas válidas en este local</p></div>
+      <div class="c-list">
+        <div class="pcard promo">
+          <div class="thumb">★</div>
+          <div class="info"><div class="nm">Combo 2 pokes + bebida</div><div class="ds">Dos pokebowls a elección y una limonada</div><div class="priceline"><span class="pr">S/ 35</span><span class="pr-old">S/ 43</span></div></div>
+        </div>
+        <div class="pcard promo">
+          <div class="thumb">★</div>
+          <div class="info"><div class="nm">10 makis + acevichado</div><div class="ds">Promo para compartir, salsa de cortesía</div><div class="priceline"><span class="pr">S/ 22</span><span class="pr-old">S/ 28</span></div></div>
+        </div>
+      </div>
+      <div class="c-sec"><h2>Pokebowls</h2><p>Base de arroz, col, zanahoria, choclo y palta</p></div>
+      <div class="c-list">
+        <div class="pcard"><div class="thumb">◍</div><div class="info"><div class="nm">Pollo al panko</div><div class="ds">Crocante, sobre base de arroz y vegetales</div><div class="pr">S/ 20</div></div></div>
+        <div class="pcard feat"><div class="thumb">✦</div><div class="info"><div class="nm">Personaliza tu poke <span class="badge">ARMA EL TUYO</span></div><div class="ds">Base, proteína, hasta 8 toppings y salsas</div><div class="pr">S/ 23</div></div></div>
+      </div>
+      <div class="c-info">
+        <h3>◈ Nuestra información</h3>
+        <div class="inforow"><div class="ii wa">✆</div><div class="it"><b>WhatsApp pedidos</b><span>+51 987 654 321</span></div><div class="go">›</div></div>
+        <div class="inforow"><div class="ii">☎</div><div class="it"><b>Delivery</b><span>+51 1 555 0123</span></div><div class="go">›</div></div>
+        <div class="inforow"><div class="ii">⌖</div><div class="it"><b>Dirección</b><span>Av. La Marina 1234, San Miguel</span></div><div class="go">›</div></div>
+        <div class="inforow"><div class="ii">◷</div><div class="it"><b>Horario</b><span>Lun–Dom · 12:00 – 22:00</span></div></div>
+      </div>
+      <div class="c-foot">Carta digital · Sugu Rolls</div>
+    </div></div>
+  </div>
+
+  <!-- 2 · CARTA con barra fija -->
+  <div class="screen-block">
+    <div class="screen-label">2 · Carta — barra fija<small>versión B: contacto siempre visible abajo</small></div>
+    <div class="phone"><div class="scroll">
+      <div class="c-topbar"><div class="b"><span class="s1">Sugu</span><span class="s2">Rolls</span></div><div class="ic">⌕</div></div>
+      <div class="c-hero"><h1>SUGU ROLLS</h1><p>Sushi · Pokebowls · Nikkei</p><span class="venue">◓ Carta del local</span></div>
+      <div class="c-chips">
+        <button class="chip on">Promos</button>
+        <button class="chip">Pokebowls</button>
+        <button class="chip">Makis</button>
+        <button class="chip">Calientes</button>
+      </div>
+      <div class="c-sec"><h2>Promociones <span class="promo-tag">SOLO HOY</span></h2><p>Ofertas válidas en este local</p></div>
+      <div class="c-list">
+        <div class="pcard promo"><div class="thumb">★</div><div class="info"><div class="nm">Combo 2 pokes + bebida</div><div class="ds">Dos pokebowls a elección y una limonada</div><div class="priceline"><span class="pr">S/ 35</span><span class="pr-old">S/ 43</span></div></div></div>
+        <div class="pcard promo"><div class="thumb">★</div><div class="info"><div class="nm">10 makis + acevichado</div><div class="ds">Promo para compartir, salsa de cortesía</div><div class="priceline"><span class="pr">S/ 22</span><span class="pr-old">S/ 28</span></div></div></div>
+      </div>
+      <div class="c-sec"><h2>Pokebowls</h2><p>Base de arroz, col, zanahoria, choclo y palta</p></div>
+      <div class="c-list">
+        <div class="pcard"><div class="thumb">◍</div><div class="info"><div class="nm">Pollo al panko</div><div class="ds">Crocante, sobre base de arroz y vegetales</div><div class="pr">S/ 20</div></div></div>
+        <div class="pcard"><div class="thumb">◍</div><div class="info"><div class="nm">Tartar de pescado</div><div class="ds">Pescado fresco marinado con toque nikkei</div><div class="pr">S/ 20</div></div></div>
+        <div class="pcard feat"><div class="thumb">✦</div><div class="info"><div class="nm">Personaliza tu poke <span class="badge">ARMA EL TUYO</span></div><div class="ds">Base, proteína, hasta 8 toppings y salsas</div><div class="pr">S/ 23</div></div></div>
+      </div>
+      <div class="c-stickybar">
+        <button class="sb-btn wa">✆ WhatsApp</button>
+        <button class="sb-btn call">☎ Delivery</button>
+        <button class="sb-btn loc">⌖ Llegar</button>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 3 · DETALLE -->
+  <div class="screen-block">
+    <div class="screen-label">3 · Detalle — personaliza<small>arma tu poke paso a paso</small></div>
+    <div class="phone"><div class="scroll">
+      <div class="d-img">◍<button class="d-back">‹</button></div>
+      <div class="d-body">
+        <div class="d-titrow"><h1>Personaliza tu poke</h1><div class="pr">S/ 23</div></div>
+        <div class="d-desc">Base de arroz, col, zanahoria, choclo, pepino y tiritas de masa wantán. Arma el tuyo paso a paso.</div>
+        <div class="step"><div class="sh"><div class="num">1</div><div class="st">Elige tu base</div></div><div class="opts"><div class="opt on">Arroz de sushi</div><div class="opt">Mix de lechugas</div></div></div>
+        <div class="step"><div class="sh"><div class="num">2</div><div class="st">Elige tu proteína</div></div><div class="opts"><div class="opt on">Pollo al panko</div><div class="opt">Tofu marinado</div><div class="opt">Tartar de pescado</div><div class="opt">Salmón marinado</div><div class="opt">Ebi furai</div></div></div>
+        <div class="step"><div class="sh"><div class="num">3</div><div class="st">Toppings (hasta 8)</div></div><div class="opts"><div class="opt on">Wantán frito</div><div class="opt on">Camote frito</div><div class="opt">Pico de gallo</div><div class="opt">Palta</div><div class="opt">Choclo</div><div class="opt">Mango</div></div></div>
+      </div>
+      <div class="d-cta"><button>Volver a la carta</button></div>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- ================= ADMIN ================= -->
+<div class="group-title">Panel del dueño</div>
+<div class="group-sub">Gestiona sus cartas, productos, información de contacto y los códigos QR.</div>
+
+<div class="stage">
+
+  <!-- 4 · GESTOR DE CARTAS -->
+  <div class="screen-block">
+    <div class="screen-label">4 · Mis cartas<small>local, feria, universidad — cada una con su QR</small></div>
+    <div class="desktop">
+      <div class="topdots"><i style="background:#ED6A5E"></i><i style="background:#F4BF50"></i><i style="background:#61C554"></i></div>
+      <div class="adm">
+        <div class="adm-side">
+          <div class="b"><span class="s1">Sugu</span><span class="s2">Rolls</span></div>
+          <div class="adm-nav"><span class="ic">▤</span>Resumen</div>
+          <div class="adm-nav on"><span class="ic">❏</span>Mis cartas</div>
+          <div class="adm-nav"><span class="ic">▦</span>Productos</div>
+          <div class="adm-nav"><span class="ic">◈</span>Información</div>
+          <div class="adm-nav"><span class="ic">▢</span>Códigos QR</div>
+          <div class="adm-nav"><span class="ic">⚙</span>Ajustes</div>
+        </div>
+        <div class="adm-main">
+          <div class="adm-h">
+            <div><h1>Mis cartas</h1><p>3 cartas · cada una abre con su propio QR</p></div>
+            <button class="btn-red">+ Nueva carta</button>
+          </div>
+          <div class="menus-grid">
+            <div class="menucard active">
+              <div class="mtop"><h3><span class="micon">◓</span>Local</h3></div>
+              <div class="mmeta">42 productos · 2 promociones<br>tumenu.pe/sugu-rolls</div>
+              <div class="mtags"><span class="mtag live">● Publicada</span><span class="mtag">Carta principal</span></div>
+              <div class="mfoot"><button class="mbtn">Editar</button><button class="mbtn qr">Ver QR</button></div>
+            </div>
+            <div class="menucard">
+              <div class="mtop"><h3><span class="micon">⛩</span>Feria</h3></div>
+              <div class="mmeta">12 productos · menú reducido<br>tumenu.pe/sugu-rolls/feria</div>
+              <div class="mtags"><span class="mtag live">● Publicada</span><span class="mtag">Temporal</span></div>
+              <div class="mfoot"><button class="mbtn">Editar</button><button class="mbtn qr">Ver QR</button></div>
+            </div>
+            <div class="menucard">
+              <div class="mtop"><h3><span class="micon">◎</span>Universidad</h3></div>
+              <div class="mmeta">8 productos · precios estudiante<br>tumenu.pe/sugu-rolls/uni</div>
+              <div class="mtags"><span class="mtag">○ Borrador</span></div>
+              <div class="mfoot"><button class="mbtn">Editar</button><button class="mbtn qr">Ver QR</button></div>
+            </div>
+            <div class="menucard newcard">
+              <div class="plus">+</div>
+              <div style="font-size:13px;font-weight:500">Crear nueva carta</div>
+              <div style="font-size:11px;color:var(--text-3)">Parte de cero o copia una existente</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 · PRODUCTOS -->
+  <div class="screen-block">
+    <div class="screen-label">5 · Productos<small>de la carta seleccionada</small></div>
+    <div class="desktop">
+      <div class="topdots"><i style="background:#ED6A5E"></i><i style="background:#F4BF50"></i><i style="background:#61C554"></i></div>
+      <div class="adm">
+        <div class="adm-side">
+          <div class="b"><span class="s1">Sugu</span><span class="s2">Rolls</span></div>
+          <div class="adm-nav"><span class="ic">▤</span>Resumen</div>
+          <div class="adm-nav"><span class="ic">❏</span>Mis cartas</div>
+          <div class="adm-nav on"><span class="ic">▦</span>Productos</div>
+          <div class="adm-nav"><span class="ic">◈</span>Información</div>
+          <div class="adm-nav"><span class="ic">▢</span>Códigos QR</div>
+          <div class="adm-nav"><span class="ic">⚙</span>Ajustes</div>
+        </div>
+        <div class="adm-main">
+          <div class="adm-h">
+            <div><h1>Productos</h1><p>Carta: Local · Promociones · 2 productos</p></div>
+            <button class="btn-red">+ Nuevo producto</button>
+          </div>
+          <div class="adm-tools">
+            <div class="adm-search">⌕ Buscar producto</div>
+            <div class="adm-filter">Promociones ▾</div>
+          </div>
+          <div class="adm-table">
+            <div class="arow feat"><div class="th">★</div><div class="nm"><b>Combo 2 pokes + bebida</b><span>S/ 35.00 · antes S/ 43.00</span></div><div class="pill on">Visible</div><div class="act">✎</div><div class="act">🗑</div></div>
+            <div class="arow feat"><div class="th">★</div><div class="nm"><b>10 makis + acevichado</b><span>S/ 22.00 · antes S/ 28.00</span></div><div class="pill on">Visible</div><div class="act">✎</div><div class="act">🗑</div></div>
+            <div class="arow"><div class="th">◍</div><div class="nm"><b>Pollo al panko</b><span>S/ 20.00</span></div><div class="pill on">Visible</div><div class="act">✎</div><div class="act">🗑</div></div>
+            <div class="arow feat"><div class="th">✦</div><div class="nm"><b>Personaliza tu poke</b><span>S/ 23.00 · con modificadores</span></div><div class="pill off">Oculto</div><div class="act">✎</div><div class="act">🗑</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 · EDITOR -->
+  <div class="screen-block">
+    <div class="screen-label">6 · Editar producto<small>imagen, precio y datos modificables</small></div>
+    <div class="desktop" style="width:560px">
+      <div class="topdots"><i style="background:#ED6A5E"></i><i style="background:#F4BF50"></i><i style="background:#61C554"></i></div>
+      <div>
+        <div class="edt-head"><h1>Editar producto</h1><div class="x">✕</div></div>
+        <div class="edt-body">
+          <div class="edt-top">
+            <div class="edt-imgcol">
+              <span class="lbl">Imagen</span>
+              <div class="imgbox">◍<div class="change">⬆ Cambiar</div></div>
+              <div class="hint">JPG o PNG, máx 2 MB. Se recorta a cuadrado.</div>
+            </div>
+            <div class="edt-fields">
+              <div class="field"><span class="lbl">Nombre</span><div class="inp">Pollo al panko</div></div>
+              <div class="field"><span class="lbl">Descripción</span><div class="inp area">Crocante, sobre base de arroz y vegetales frescos</div></div>
+            </div>
+          </div>
+          <div class="row2" style="margin-bottom:18px">
+            <div><span class="lbl">Precio (S/)</span><div class="inp">20.00</div></div>
+            <div><span class="lbl">Categoría</span><div class="inp" style="justify-content:space-between">Pokebowls <span style="color:var(--text-2)">▾</span></div></div>
+          </div>
+          <span class="lbl">Etiquetas</span>
+          <div class="tags"><div class="tag">🌶 Picante</div><div class="tag">❄ Frío</div><div class="tag">🌱 Vegano</div></div>
+          <div class="toggle-row"><span>Visible para clientes</span><div class="sw"><i></i></div></div>
+          <div class="toggle-row"><span>Marcar como promoción</span><div class="sw off"><i></i></div></div>
+          <div class="edt-actions"><button class="btn-ghost">Cancelar</button><button class="btn-red" style="padding:9px 20px">Guardar cambios</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 · INFORMACIÓN -->
+  <div class="screen-block">
+    <div class="screen-label">7 · Información del local<small>lo que llena la sección de contacto</small></div>
+    <div class="desktop" style="width:560px">
+      <div class="topdots"><i style="background:#ED6A5E"></i><i style="background:#F4BF50"></i><i style="background:#61C554"></i></div>
+      <div>
+        <div class="edt-head"><h1>Información del local</h1></div>
+        <div class="edt-body">
+          <div class="info-form">
+            <div class="info-field"><span class="lbl" style="color:var(--ok-text)">✆ WhatsApp para pedidos</span><div class="inp">+51 987 654 321</div></div>
+            <div class="info-field"><span class="lbl">☎ Teléfono de delivery</span><div class="inp">+51 1 555 0123</div></div>
+            <div class="info-field"><span class="lbl">⌖ Dirección</span><div class="inp">Av. La Marina 1234, San Miguel</div></div>
+            <div class="info-field"><span class="lbl">◷ Horario de atención</span><div class="inp">Lun–Dom · 12:00 – 22:00</div></div>
+            <div class="row2">
+              <div class="info-field"><span class="lbl">Instagram</span><div class="inp">@sugurolls</div></div>
+              <div class="info-field"><span class="lbl">Link de Google Maps</span><div class="inp" style="color:var(--text-3)">Pegar enlace…</div></div>
+            </div>
+            <div class="edt-actions"><button class="btn-red" style="padding:9px 20px">Guardar información</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 · QR -->
+  <div class="screen-block">
+    <div class="screen-label">8 · Código QR<small>uno por carta — para imprimir</small></div>
+    <div class="desktop" style="width:420px">
+      <div class="topdots"><i style="background:#ED6A5E"></i><i style="background:#F4BF50"></i><i style="background:#61C554"></i></div>
+      <div class="qr-wrap">
+        <div class="qr-venue">⛩ Carta: Feria</div>
+        <div class="qr-card">
+          <div class="b"><span class="s1">Sugu</span><span class="s2">Rolls</span></div>
+          <div class="qr-box" id="qrbox"></div>
+          <div class="scan">Escanea para ver la carta</div>
+          <div class="url">tumenu.pe/sugu-rolls/feria</div>
+        </div>
+        <div class="qr-actions"><button class="btn-ghost">Descargar PNG</button><button class="btn-red" style="padding:9px 18px">Descargar PDF</button></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="tip">
+  <h4>Cómo leer esto</h4>
+  <b>Vista del cliente (1–3):</b> las pantallas 1 y 2 muestran dos formas de presentar el contacto — la <b>A</b> con la sección completa al final, la <b>B</b> con una barra fija siempre visible. Ambas llevan ya la sección de <b>Promociones</b> arriba. Tú eliges cuál te gusta (o las combinamos). La 3 es el detalle del poke personalizable.<br><br>
+  <b>Panel del dueño (4–8):</b> la pantalla 4 es la pieza nueva clave — <b>Mis cartas</b>: Local, Feria y Universidad, cada una con sus propios productos y su propio QR. Cuando va a una feria, imprime el QR de "Feria" y ahí solo se ve ese menú. La 5 son los productos de la carta elegida (con promos), la 6 el editor con imagen modificable, la 7 la información de contacto, y la 8 el QR de cada carta. <b>El QR nunca cambia de destino:</b> el de feria siempre abre la carta de feria.
+</div>
+
+<script>
+  (function(){
+    const n=21, cell=100/n;
+    let svg='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">';
+    function finder(x,y){
+      svg+='<rect x="'+(x*cell)+'" y="'+(y*cell)+'" width="'+(7*cell)+'" height="'+(7*cell)+'" fill="#141414"/>';
+      svg+='<rect x="'+((x+1)*cell)+'" y="'+((y+1)*cell)+'" width="'+(5*cell)+'" height="'+(5*cell)+'" fill="#fff"/>';
+      svg+='<rect x="'+((x+2)*cell)+'" y="'+((y+2)*cell)+'" width="'+(3*cell)+'" height="'+(3*cell)+'" fill="#141414"/>';
+    }
+    let seed=11;
+    function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;}
+    for(let y=0;y<n;y++)for(let x=0;x<n;x++){
+      const inFinder=(x<8&&y<8)||(x>n-9&&y<8)||(x<8&&y>n-9);
+      if(inFinder)continue;
+      if(rnd()>0.52) svg+='<rect x="'+(x*cell)+'" y="'+(y*cell)+'" width="'+cell+'" height="'+cell+'" fill="#141414"/>';
+    }
+    finder(0,0);finder(n-7,0);finder(0,n-7);
+    svg+='</svg>';
+    document.getElementById('qrbox').innerHTML=svg;
+  })();
+</script>
+</body>
+</html>
