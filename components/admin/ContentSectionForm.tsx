@@ -1,18 +1,9 @@
 import { saveContentAction } from "@/app/admin/actions";
+import { contentSchema } from "./contentSchema";
+import RepeaterField from "./RepeaterField";
 
-const sectionTitles: Record<string, string> = {
-  general: "Datos generales (marca, teléfono, email, WhatsApp…)",
-  hero: "Hero (portada)",
-  about: "Sobre el especialista",
-  services_head: "Encabezado de Servicios",
-  gallery: "Galería (encabezado + bloque destacado)",
-  process: "Proceso",
-  testimonials_head: "Encabezado de Testimonios",
-  contact: "Contacto (encabezado)",
-};
-
-// value: objeto JSON de la sección. Renderiza inputs para strings y
-// textareas JSON para arrays/objetos (badges, stats, steps, paragraphs…).
+// Renderiza un formulario amigable por sección según contentSchema.
+// Strings -> input/textarea (str__campo). Listas -> RepeaterField (json__campo).
 export default function ContentSectionForm({
   sectionKey,
   value,
@@ -21,37 +12,53 @@ export default function ContentSectionForm({
   value: Record<string, unknown>;
 }) {
   const action = saveContentAction.bind(null, sectionKey);
+  const schema = contentSchema[sectionKey];
+  if (!schema) return null;
 
   return (
     <form action={action} className="card section-block">
-      <h2>{sectionTitles[sectionKey] ?? sectionKey}</h2>
-      {Object.entries(value).map(([field, val]) => {
-        const isString = typeof val === "string";
-        const isLong = isString && (val as string).length > 60;
-        if (isString) {
-          return (
-            <div className="field" key={field}>
-              <label htmlFor={`${sectionKey}-${field}`}>{field}</label>
-              {isLong ? (
-                <textarea id={`${sectionKey}-${field}`} name={`str__${field}`} defaultValue={val as string} />
-              ) : (
-                <input id={`${sectionKey}-${field}`} name={`str__${field}`} defaultValue={val as string} />
-              )}
-            </div>
-          );
+      <h2>{schema.title}</h2>
+      {schema.fields.map((f) => {
+        switch (f.type) {
+          case "text":
+          case "textarea": {
+            const val = String(value[f.name] ?? "");
+            return (
+              <div className="field" key={f.name}>
+                <label htmlFor={`${sectionKey}-${f.name}`}>{f.label}</label>
+                {f.type === "textarea" ? (
+                  <textarea id={`${sectionKey}-${f.name}`} name={`str__${f.name}`} defaultValue={val} />
+                ) : (
+                  <input id={`${sectionKey}-${f.name}`} name={`str__${f.name}`} defaultValue={val} />
+                )}
+                {f.help && <span className="muted">{f.help}</span>}
+              </div>
+            );
+          }
+          case "list-object":
+            return (
+              <RepeaterField
+                key={f.name}
+                name={f.name}
+                label={f.label}
+                itemLabel={f.itemLabel}
+                subfields={f.subfields}
+                initial={value[f.name]}
+              />
+            );
+          case "list-text":
+            return (
+              <RepeaterField
+                key={f.name}
+                name={f.name}
+                label={f.label}
+                itemLabel={f.itemLabel}
+                initial={value[f.name]}
+              />
+            );
+          default:
+            return null;
         }
-        // Arrays / objetos -> JSON editable
-        return (
-          <div className="field" key={field}>
-            <label htmlFor={`${sectionKey}-${field}`}>{field} <span className="muted">(JSON)</span></label>
-            <textarea
-              id={`${sectionKey}-${field}`}
-              name={`json__${field}`}
-              defaultValue={JSON.stringify(val, null, 2)}
-              style={{ fontFamily: "monospace", minHeight: 140 }}
-            />
-          </div>
-        );
       })}
       <button className="abtn" type="submit">Guardar sección</button>
     </form>

@@ -8,9 +8,14 @@ export default function ProjectForm({ project }: { project?: Project }) {
       {project?.image_path && <input type="hidden" name="image_path" value={project.image_path} />}
 
       <div className="field">
-        <label htmlFor="image_file">Subir imagen {project ? "(deja vacío para conservar la actual)" : ""}</label>
+        <label htmlFor="image_file">
+          Subir imagen {project ? "(deja vacío para conservar la actual)" : ""}
+        </label>
         <input id="image_file" name="image_file" type="file" accept="image/*" />
-        <span className="muted">Se sube a Supabase Storage. Alternativamente, pega una URL abajo.</span>
+        <span className="muted">
+          Medida recomendada: <b>1200 × 900 px</b> (proporción 4:3, horizontal) · JPG o WebP · máx. 500 KB
+          para la mejor calidad y velocidad de carga. Se sube a Supabase Storage; también puedes pegar una URL abajo.
+        </span>
       </div>
       <div className="field">
         <label htmlFor="image_url">URL de imagen (opcional)</label>

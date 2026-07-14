@@ -24,8 +24,9 @@ export default async function ContentAdmin() {
   return (
     <AdminShell active="content" title="Contenido del sitio" subtitle="Textos de Hero, Sobre, Proceso y encabezados. La sección Service Area es estática.">
       <div className="notice">
-        Los campos marcados como <b>(JSON)</b> son listas (badges, estadísticas, pasos…). Edita respetando la estructura;
-        si el JSON es inválido, se mostrará un error al guardar.
+        Edita los textos de cada sección y presiona <b>Guardar sección</b>. En las listas
+        (indicadores, párrafos, estadísticas, pasos) usa <b>+ Agregar</b> o <b>Quitar</b>,
+        y las flechas ↑ ↓ para cambiar el orden.
       </div>
       {order.map((key) => (
         <ContentSectionForm

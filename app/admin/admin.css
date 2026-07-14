@@ -79,7 +79,13 @@
 }
 .field textarea { min-height: 90px; resize: vertical; }
 .field-row { display: grid; gap: 0.9rem; grid-template-columns: 1fr 1fr; }
-@media (max-width: 640px) { .field-row { grid-template-columns: 1fr; } }
+.field-row-3 { display: grid; gap: 0.9rem; grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .field-row, .field-row-3 { grid-template-columns: 1fr; } }
+
+/* Repeater (listas editables) */
+.repeater { display: grid; gap: 0.7rem; }
+.repeater-item { border: 1px solid var(--line); border-radius: 0 12px 0 12px; padding: 0.8rem 0.9rem; background: var(--stone); }
+.repeater-item-head { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 0.6rem; }
 
 /* Buttons */
 .abtn {
